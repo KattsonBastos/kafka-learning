@@ -1,0 +1,2 @@
+bytewax==0.20.1
+git+https://github.com/dpkp/kafka-python.git
