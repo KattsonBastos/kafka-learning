@@ -1,2 +1,9 @@
-bytewax==0.20.1
-git+https://github.com/dpkp/kafka-python.git
+python-dotenv==0.21.0
+pandas==1.5.2
+numpy==1.24.1
+confluent-kafka==1.9.2
+avro-python3==1.10.2
+jsonschema==4.17.3
+requests
+Faker==16.6.0
+faker_airtravel==0.4
