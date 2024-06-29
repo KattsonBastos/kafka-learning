@@ -5,6 +5,7 @@ package com.kafka;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.CooperativeStickyAssignor;
 
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.errors.WakeupException;
@@ -19,9 +20,9 @@ import java.util.Arrays;
 import java.util.Properties;
 
 // main class
-public class ConsumerGraceful {
+public class ConsumerCoop {
 
-    private static final Logger log = LoggerFactory.getLogger(ConsumerGraceful.class.getSimpleName());
+    private static final Logger log = LoggerFactory.getLogger(ConsumerCoop.class.getSimpleName());
 
     public static void main(String[] args) {
         log.info("Consumer Started!");
@@ -41,6 +42,7 @@ public class ConsumerGraceful {
         properties.setProperty("value.deserializer", StringDeserializer.class.getName());
         properties.setProperty("group.id", groupId);
         properties.setProperty("auto.offset.reset", "earliest");
+        properties.setProperty("partition.assignment.strategy", CooperativeStickyAssignor.class.getName());
 
         // create a consumer
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
@@ -73,8 +75,6 @@ public class ConsumerGraceful {
             
             // poll for data
             while (true) {
-
-                log.info("Polling");
 
                 ConsumerRecords<String, String> records =
                         consumer.poll(Duration.ofMillis(1000));
