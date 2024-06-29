@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-mv() {
+build() {
 
   ## 
   echo "### Maven build"
@@ -15,13 +15,13 @@ pd() {
 
 cm() {
   echo "### Consuming.."
-  java -cp target/kafka-producer-1.0-SNAPSHOT.jar com.kafka.Consumer
+  java -cp target/kafka-producer-1.0-SNAPSHOT.jar com.kafka.ConsumerGraceful
 }
 
 
 case $1 in
-  mv)
-    mv
+  build)
+    build
     ;;
   pd)
     pd
@@ -30,6 +30,6 @@ case $1 in
     cm
     ;;
   *)
-    echo "Usage: $0 {up, pd, cm}"
+    echo "Usage: $0 {build, pd, cm}"
     ;;
 esac
